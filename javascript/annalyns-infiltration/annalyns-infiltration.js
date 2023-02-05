@@ -1,11 +1,11 @@
 export function canExecuteFastAttack(knightIsAwake) {
-  return !(knightIsAwake)
+  return !knightIsAwake
 }
 export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
   return knightIsAwake || archerIsAwake || prisonerIsAwake
 }
 export function canSignalPrisoner(archerIsAwake, prisonerIsAwake) {
-  return prisonerIsAwake && !(archerIsAwake)
+  return prisonerIsAwake && !archerIsAwake
 }
 export function canFreePrisoner(
   knightIsAwake,
@@ -13,9 +13,6 @@ export function canFreePrisoner(
   prisonerIsAwake,
   petDogIsPresent
 ) {
-  return (petDogIsPresent && !(archerIsAwake)) ||
-    (!(petDogIsPresent) &&
-      !(archerIsAwake) &&
-      !(knightIsAwake) &&
-      prisonerIsAwake)
+  return (petDogIsPresent && !archerIsAwake) ||
+    (!archerIsAwake && !knightIsAwake && prisonerIsAwake)
 }
