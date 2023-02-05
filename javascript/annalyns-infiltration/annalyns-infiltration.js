@@ -18,6 +18,4 @@ export function canFreePrisoner(
       !(archerIsAwake) &&
       !(knightIsAwake) &&
       prisonerIsAwake)
-    ? true
-    : false
 }
