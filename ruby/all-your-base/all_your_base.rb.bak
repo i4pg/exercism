@@ -1,0 +1,42 @@
+module BaseConverter
+  def self.convert(_input_base, digits, output_base)
+    output_base == 2 ? binary_to_decimal(digits) : decimal_to_binary(digits)
+  end
+
+  def self.to_digit(numbers, base)
+    numbers.each_with_object([]) do |num, digits|
+      next if num.zero?
+
+      digits << num % base
+    end
+  end
+
+  def self.from_digits(digits, base)
+    arr = []
+    digits.map do |digit|
+      while digit.positive?
+        arr << digit % base
+        digit /= base
+      end
+    end
+    arr
+  end
+
+  def self.decimal_to_binary(digits)
+    result = []
+    digits = digits.join.to_i
+    until digits.zero?
+      digits /= 2
+      result << digits % 2
+    end
+    result
+  end
+
+  def self.binary_to_decimal(digits)
+    result = []
+    digits.reverse.map.with_index do |digit, index|
+      result << (digit * (2**index))
+    end
+    result.sum.split(//)
+  end
+end

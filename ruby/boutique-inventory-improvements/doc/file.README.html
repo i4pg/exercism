@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><h1 id="boutique-inventory-improvements">Boutique Inventory Improvements</h1>
+
+<p>Welcome to Boutique Inventory Improvements on Exercism’s Ruby Track.
+If you need help running the tests or submitting your code, check out <code>HELP.md</code>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><code>OpenStruct</code> allows you to easily create an object from a <code>Hash</code>. 
+Rather than having to access using <code>Hash</code> keys, <code>OpenStruct</code> instead allows us to use methods to access and set values.</p>
+
+<p>```ruby
+attributes = { name: “Jeremy Walker”, age: 21, location: “Nomadic” }
+person = OpenStruct.new(attributes)</p>
+
+<p>person.name
+#=&gt; Jeremy Walker</p>
+
+<p>person.location
+#=&gt; Nomadic</p>
+
+<h1 id="update-the-age"> Update the age</h1>
+<p>person.age = 35</p>
+
+<h1 id="it-sets-correctly">It sets correctly</h1>
+<p>person.age
+#=&gt; 35
+```</p>
+
+<p>One bonus to this approach is that we can take advantage of a shortcut when using block syntax. 
+In situations where a block calls a single method, you can replace the block with <code>&amp;:</code> followed by the method name. 
+For example, these two lines are synonymous:</p>
+
+<p><code>ruby
+people.sum { |person| person.age }
+people.sum(&amp;:age)
+</code></p>
+
+<h2 id="standard-library">Standard Library</h2>
+
+<p>All of the classes you’ve seen in previous exercises have been part of Ruby’s Core Library.</p>
+
+<p>OpenStruct is part of Ruby’s Standard Library (often shortened to “stdlib”) - a collection of classes for working with things such as dates, json, and networking.
+It also provides some useful functionality for making your code easier to work with.</p>
+
+<p>When using classes that are not from the Core Library — your own code in different files, classes from stdlib, or external dependencies — we need to import them using the <code>require</code> method before we can use them.
+For example:</p>
+
+<p>```ruby
+require ‘ostruct’</p>
+
+<p>person = OpenStruct.new(name: “Jeremy Walker”)
+# …
+```</p>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>You’re continuing to work on the stock management system you built previously. Since discovering <code>OpenStruct</code> and block shortcuts, you’ve decided to refactor the code a little. Rather than storing the items as hashes, you’re going to utilize your newfound skills.</p>
+
+<h2 id="allow-retrievable-of-items">1. Allow retrievable of items</h2>
+
+<p>You want to continue to retrieve the list of items in stock, but this time they should be objects that can have methods called on them.</p>
+
+<p>```ruby
+inventory = BoutiqueInventory.new([
+  65.00, name: “Maxi Brown Dress”, quantity_by_size: {s: 3, m: 7, l: 8, xl: 4},
+  50.00, name: “Red Short Skirt”, quantity_by_size: {},
+  29.99, name: “Black Short Skirt”, quantity_by_size: {s: 1, xl: 4},
+  20.00, name: “Bamboo Socks Cats”, quantity_by_size: {s: 7, m: 2}
+])</p>
+
+<p>inventory.items.first.name
+# =&gt; “Maxi Brown Dress”</p>
+
+<p>inventory.items.first.price
+# =&gt; 65</p>
+
+<p>inventory.items.size
+# =&gt; 4
+```</p>
+
+<p>Refactor <code>item_names</code> to use the new block shortcut you’ve learnt rather than hashes.
+As a reminder, the method should return:</p>
+
+<p>```ruby
+BoutiqueInventory.new([
+  65.00, name: “Maxi Brown Dress”, quantity_by_size: {s: 3, m: 7, l: 8, xl: 4},
+  50.00, name: “Red Short Skirt”, quantity_by_size: {},
+  29.99, name: “Black Short Skirt”, quantity_by_size: {s: 1, xl: 4},
+  20.00, name: “Bamboo Socks Cats”, quantity_by_size: {s: 7, m: 2}
+]).item_names</p>
+
+<h1 id="bamboo-socks-cats-black-short-skirt-maxi-brown-dress-red-short-skirt">=&gt; [“Bamboo Socks Cats”, “Black Short Skirt”, “Maxi Brown Dress”, “Red Short Skirt”]</h1>
+<p>```</p>
+
+<p>Refactor <code>total_stock</code> to use the new block shortcut you’ve learnt rather than hashes.
+As a reminder, the method should return::</p>
+
+<p>```ruby
+BoutiqueInventory.new([
+  65.00, name: “Maxi Brown Dress”, quantity_by_size: {s: 3, m: 7, l: 8, xl: 4},
+  50.00, name: “Red Short Skirt”, quantity_by_size: {},
+  29.99, name: “Black Short Skirt”, quantity_by_size: {s: 1, xl: 4},
+  20.00, name: “Bamboo Socks Cats”, quantity_by_size: {s: 7, m: 2}
+]).total_stock</p>
+
+<h1 id="section">=&gt; 36</h1>
+<p>```</p>
+
+<h2 id="source">Source</h2>
+
+<h3 id="created-by">Created by</h3>
+
+<ul>
+  <li>@iHiD</li>
+</ul>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu Jan 19 09:39:39 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.2.0).
+</div>
+
+    </div>
+  </body>
+</html>

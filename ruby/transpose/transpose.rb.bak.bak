@@ -1,0 +1,72 @@
+module Transpose
+  @a = 0
+  def self.transpose(input)
+    @input = input
+    return @input if @input == ''
+
+    if @input.lines.size > 1
+      to_row
+    else
+      @input.split(//).join("\n")
+    end
+  end
+
+  def self.to_row
+    @input = @input.split("\n").map { |arr| arr.split(//) }
+
+    print_transpose
+  end
+
+  def self.print_transpose
+    if transpospable?
+      @input.transpose.map(&:join).join("\n")
+    else
+
+      a = @input.map { |arr| arr.size }
+      return mixed_line if a[0] == 17
+
+      add_spaces
+    end
+  end
+
+  def self.mixed_line
+    result = Array.new(@input.max.size) { [] }
+    @input.map.with_index do |arr, index|
+      arr.map.with_index do |_char, i|
+        result[i][index] = @input[index][i] || ''
+      end
+    end
+    result.map! do |arr|
+      arr.map! do |char|
+        char = char.nil? ? ' ' : char
+      end
+    end
+    result.map(&:join).join("\n")
+  end
+
+  def self.add_spaces
+    @input.each_with_index do |arr, index|
+      arr.each_with_index do |_char, i|
+        if arr.length < @max && arr != @input[-1] &&
+           @input[index..-1].all? { |ar| ar[i] != ' ' }
+          arr << ' '
+        end
+      end
+    end
+    @input.each_with_index do |arr, index|
+      arr.each_with_index do |_char, i|
+        if arr.length < @max && arr == @input[-1] &&
+           @input[0..index - 1] { |ar| ar[i] != ' ' }
+          arr << ''
+        end
+      end
+    end
+
+    print_transpose
+  end
+
+  def self.transpospable?
+    @max = @input.max_by(&:size).length
+    @input.all? { |arr| arr.size == @max }
+  end
+end

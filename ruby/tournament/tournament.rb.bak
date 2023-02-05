@@ -1,0 +1,23 @@
+require_relative 'team'
+require_relative 'match'
+
+module Tournament
+  WIN_POINTS = 3
+  TIE_POINTS = 1
+  LOSS_POINTS = -3
+
+  def self.tally(input, result = [])
+    result << format('%0s%52s', 'Team', "| MP |  W |  D |  L |  P\n")
+    unless input.empty?
+      input.each_line.map(&:strip).each do |match|
+        Match.new(match)
+      end
+      Team.all.map do |team|
+        result << format('%0s%38s', team.to_s,
+                         "|  #{team.matches_played} |  #{team.won} |  #{team.draw} |  #{team.lost} |  #{team.points}\n")
+      end
+    end
+    puts Match.all
+    result.join
+  end
+end

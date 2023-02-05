@@ -1,0 +1,50 @@
+module Transpose
+  def self.transpose(input)
+    lines = input.split("\n")
+    length = lines.max { |line| line.length }.length
+    arr = Array.new(lines.max.size) { [] }
+    lines.map.with_index do |line, index|
+      line.each_char.with_index do |char, i|
+        o = arr[i] || nil
+        o << char if o
+        if lines&.[](index + 1)&.[](i + 1) &&
+           (i == (line.length - 1))
+          space = lines[index + 1].size - line.length
+          space.times do |n|
+            place = arr[i + n + 1] || nil
+            place << ' ' if place
+          end
+        end
+      end
+    end
+    p arr.map(&:join).join("\n")
+    # input.lines do |line|
+    #   arr = []
+    #   chars = line.scan(/[\w\W]/)
+    #   chars.each { |char| arr << char }
+    #   result << arr
+    # end
+    # # result.map { |ele| ele.delete_if { |e| e == "\n" } }
+    # maxx = result.max { |a, b| a.size <=> b.size }
+    # # maxx = result.index(maxx)
+    # p ar = Array.new(maxx.size || result.size || 1) { [] }
+    # p result
+    # result.map.with_index do |element, _index|
+    #   element.each_with_index do |chr, i|
+    #     ar[i] << chr
+    #   end
+    # end
+    # p ar.map(&:join)
+    # p ar.map(&:join).join("\n")
+    # maxx = result.max { |a, b| a.size <=> b.size }
+    # maxx = result.index(maxx)
+    # result.map { |ele| ele << ' ' if ele.size < result[maxx].size }
+    # result = result.transpose.map(&:join).join("\n")
+    # if result[-1] == ' '
+    #   result[0..-2]
+    # else
+    #   result
+    # end
+  end
+end
+
